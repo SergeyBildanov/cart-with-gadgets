@@ -39,13 +39,13 @@ export default class Cart {
         this._items = this._items.filter((item) => {item.id !== id});
     }
     decreaseAmount(id: number): void{
-        let item = this.items.filter((item) => {item.id === id})[0];
-        if(item.amount && item.amount === 1){
+        let item = this.items.find(elem => elem.id === id);
+        if(item && item.amount && item.amount == 1){
             this._items = this._items.filter((item) => {item.id !== id});
             return;
         }
         this._items = this._items.filter((i) => {
-            if(i.id === item.id && i.amount && i.amount>1){
+            if(item && i.id == item.id && i.amount && i.amount>1){
                 i.amount -= 1;
             }
             return i;
