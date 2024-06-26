@@ -4,10 +4,9 @@ export default class Cart {
     private _items: Buyable[] = [];
 
     add(item: Buyable): void {
-        const items = this.items;
         if(this.items.includes(item)){
             let amount = this._items[this._items.indexOf(item)].amount;
-                if(amount != undefined){
+                if(amount !== undefined){
                     this._items[this._items.indexOf(item)].amount = amount + 1;
                 }
                 this._items[this._items.indexOf(item)] = item;
@@ -23,8 +22,7 @@ export default class Cart {
         return [...this._items]; 
     }
     withoutPurchase(): number{
-        const items = this.items;
-        return items.reduce((acc, item)=>{
+        return this.items.reduce((acc, item)=>{
             let price = item.price;
             if(item.amount){
                 price = price * item.amount;
@@ -38,12 +36,12 @@ export default class Cart {
         return cost*(100 - purchase)*0.01;
     }
     remove(id:number): void{
-        this._items = this._items.filter((item) => {return item.id != id});
+        this._items = this._items.filter((item) => {item.id !== id});
     }
     decreaseAmount(id: number): void{
-        let item = this.items.filter((item) => {return item.id === id})[0];
+        let item = this.items.filter((item) => {item.id === id})[0];
         if(item.amount && item.amount == 1){
-            this._items = this._items.filter((item) => {return item.id != id});
+            this._items = this._items.filter((item) => {item.id !== id});
             return;
         }
         this._items = this._items.filter((i) => {
